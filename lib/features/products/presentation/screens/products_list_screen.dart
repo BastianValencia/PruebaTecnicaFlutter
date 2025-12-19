@@ -20,7 +20,7 @@ class ProductsListScreen extends ConsumerWidget {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () => notifier.loadProducts(),
-          color: Colors.black,
+          color: colors.onSurface,
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(

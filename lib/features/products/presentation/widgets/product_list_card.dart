@@ -80,9 +80,8 @@ class ProductListCard extends StatelessWidget {
                      crossAxisAlignment: CrossAxisAlignment.baseline,
                      textBaseline: TextBaseline.alphabetic,
                      children: [
-                        Text('\$', style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.black)),
                         Text(
-                          product.formattedPrice.replaceAll(RegExp(r'[^0-9.,]'), ''), 
+                          product.formattedPrice, 
                           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                      ],

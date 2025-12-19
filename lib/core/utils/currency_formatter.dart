@@ -3,12 +3,12 @@ import 'package:intl/intl.dart';
 class CurrencyFormatter {
   static final NumberFormat _formatter = NumberFormat.currency(
     locale: 'es_CL', 
-    symbol: '\$',
+    symbol: '',
     decimalDigits: 0, 
-    customPattern: '\u00A4 #,###', 
+    customPattern: '#,###', 
   );
 
   static String format(double value, {String currency = 'USD'}) {
-    return '${_formatter.format(value)} $currency';
+    return '${_formatter.format(value).trim()} $currency';
   }
 }
