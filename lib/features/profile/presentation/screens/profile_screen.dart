@@ -40,7 +40,7 @@ class ProfileScreen extends ConsumerWidget {
                              children: [
                                Text('Hola, ${user.name}', style: TextStyle(color: Colors.grey, fontSize: 16.sp)),
                                SizedBox(height: 0.5.h),
-                               Text(user.email, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp, color: Colors.grey)),
+                               Text(user.email, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp, color: Colors.grey.shade600)),
                              ],
                            ),
                          ],
@@ -67,7 +67,7 @@ class ProfileScreen extends ConsumerWidget {
                  ),
                ),
                
-               const Divider(height: 1),
+               const Divider(height: 1, color: Colors.grey),
                
                // Account Settings List
                _buildSectionTitle('Configuración de Cuenta'),

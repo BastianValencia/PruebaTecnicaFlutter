@@ -23,6 +23,97 @@ Aplicación robusta de marketplace en Flutter desarrollada para una prueba técn
 ### **Utilidades Core**
 - **Formateo de Moneda:** Formateador personalizado que refleja estándares chilenos/internacionales (ej., `$ 125.000 USD`).
 - **Theming:** `AppTheme` centralizado con soporte para ColorScheme - ThemeDark y ThemeLight.
+- **Robustez de Datos:** Sistema de serialización "Blindado" (`RobustStringConverter`, `RobustDoubleConverter`) que evita crasheos por datos inconsistentes (nulls, tipos erróneos) con impacto de rendimiento despreciable (0.24µs por item).
+
+---
+
+## 📊 Diagramas Técnicos
+
+### **1. Arquitectura & Componentes**
+Estructura de Clean Architecture + Riverpod.
+
+```mermaid
+graph TD
+    subgraph Presentation ["Capa de Presentación (UI & State)"]
+        UI_List["ProductsListScreen"]
+        UI_Detail["ProductDetailScreen"]
+        Provider["ProductsNotifier (Riverpod)"]
+        State["ProductsState"]
+        
+        UI_List -->|Watch| Provider
+        UI_Detail -->|Watch| Provider
+        Provider -->|Emit| State
+        State -->|Render| UI_List
+        State -->|Render| UI_Detail
+    end
+
+    subgraph Domain ["Capa de Dominio (Business Rules)"]
+        Entity["Product Entity"]
+        RepoInterface["ProductsRepository (Abstract)"]
+        
+        Provider -->|Call| RepoInterface
+        RepoInterface -->|Return| Entity
+    end
+
+    subgraph Data ["Capa de Datos (Implementation)"]
+        RepoImpl["ProductsRepositoryImpl"]
+        DataSource["ProductsRemoteDatasource"]
+        Model["ProductModel (DTO)"]
+        
+        RepoImpl -.->|Implements| RepoInterface
+        RepoImpl -->|Call| DataSource
+        DataSource -->|Return JSON| Model
+        Model -->|Map to| Entity
+    end
+    
+    subgraph External ["Sistema Externo"]
+       API["Simulated Backend API"]
+       DataSource -- "HTTP / Delay" --> API
+    end
+```
+
+### **2. Diagrama de Secuencia: Flujo de Detalle e Inconsistencia**
+Muestra cómo se manejan los errores de consistencia (producto "missing" o 404).
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant UI as ProductDetailScreen
+    participant Notifier as ProductsNotifier
+    participant Repo as ProductsRepository
+    participant DS as RemoteDatasource
+
+    User->>UI: Toca un producto
+    activate UI
+    UI->>Notifier: refreshProduct(id)
+    activate Notifier
+    
+    Notifier->>Repo: getProductDetail(id)
+    activate Repo
+    Repo->>DS: getProductDetail(id)
+    activate DS
+    
+    alt Producto Existe (Happy Path)
+        DS-->>Repo: ProductModel
+        Repo-->>Notifier: Product (Entity)
+        Notifier-->>UI: State Change (Data)
+        UI-->>User: Muestra Detalle
+    
+    else Inconsistencia (Producto no encontrado / 404)
+        DS-->>Repo: Throw ProductNotFoundException
+        deactivate DS
+        Repo-->>Notifier: Throw ProductNotFoundException
+        deactivate Repo
+        
+        Note over Notifier: Catch Exception & markAsMissing(id)
+        Notifier-->>UI: State Change (Status: missing)
+        
+        UI-->>User: Muestra Pantalla de Error "No disponible"
+    end
+    
+    deactivate Notifier
+    deactivate UI
+```
 
 ---
 
@@ -74,7 +165,9 @@ lib/
 
 ## 🧪 Testing
 
-- **Unit Tests:** Ubicados en `test/features/`. Cubren la lógica de los Repositorios.
+- **Unit Tests:** Ubicados en `test/features/`. Cubren la lógica de los Repositorios y Modelos.
+- **Robustness Tests:** `product_model_test.dart` verifica la resiliencia ante datos corruptos.
+- **Benchmarks:** `performance_benchmark_test.dart` mide el impacto del parsing (Clean vs Dirty Data).
 - **Widget Tests:** Cubren el renderizado de la UI e interacciones (En progreso).
 
 ---

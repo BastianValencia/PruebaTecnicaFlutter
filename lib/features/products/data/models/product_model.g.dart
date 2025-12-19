@@ -8,20 +8,20 @@ part of 'product_model.dart';
 
 _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
     _ProductModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      price: (json['price'] as num).toDouble(),
-      currency: json['currency'] as String,
-      imageUrl: json['imageUrl'] as String,
-      location: json['location'] as String,
+      id: const RobustStringConverter().fromJson(json['id']),
+      name: const RobustStringConverter().fromJson(json['name']),
+      price: const RobustDoubleConverter().fromJson(json['price']),
+      currency: const RobustStringConverter().fromJson(json['currency']),
+      imageUrl: const RobustStringConverter().fromJson(json['imageUrl']),
+      location: const RobustStringConverter().fromJson(json['location']),
     );
 
 Map<String, dynamic> _$ProductModelToJson(_ProductModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'price': instance.price,
-      'currency': instance.currency,
-      'imageUrl': instance.imageUrl,
-      'location': instance.location,
+      'id': const RobustStringConverter().toJson(instance.id),
+      'name': const RobustStringConverter().toJson(instance.name),
+      'price': const RobustDoubleConverter().toJson(instance.price),
+      'currency': const RobustStringConverter().toJson(instance.currency),
+      'imageUrl': const RobustStringConverter().toJson(instance.imageUrl),
+      'location': const RobustStringConverter().toJson(instance.location),
     };

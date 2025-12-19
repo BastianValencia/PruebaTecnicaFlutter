@@ -1,3 +1,4 @@
+import 'package:enm/core/utils/json_converters.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/product.dart';
 
@@ -7,12 +8,12 @@ part 'product_model.g.dart';
 @freezed
 abstract class ProductModel with _$ProductModel {
   const factory ProductModel({
-    required String id,
-    required String name,
-    required double price,
-    required String currency,
-    required String imageUrl,
-    required String location,
+    @RobustStringConverter() required String id,
+    @RobustStringConverter() required String name,
+    @RobustDoubleConverter() required double price,
+    @RobustStringConverter() required String currency,
+    @RobustStringConverter() required String imageUrl,
+    @RobustStringConverter() required String location,
   }) = _ProductModel;
 
   const ProductModel._();

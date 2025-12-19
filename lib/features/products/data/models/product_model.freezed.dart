@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductModel {
 
- String get id; String get name; double get price; String get currency; String get imageUrl; String get location;
+@RobustStringConverter() String get id;@RobustStringConverter() String get name;@RobustDoubleConverter() double get price;@RobustStringConverter() String get currency;@RobustStringConverter() String get imageUrl;@RobustStringConverter() String get location;
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ProductModelCopyWith<$Res>  {
   factory $ProductModelCopyWith(ProductModel value, $Res Function(ProductModel) _then) = _$ProductModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, double price, String currency, String imageUrl, String location
+@RobustStringConverter() String id,@RobustStringConverter() String name,@RobustDoubleConverter() double price,@RobustStringConverter() String currency,@RobustStringConverter() String imageUrl,@RobustStringConverter() String location
 });
 
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String currency,  String imageUrl,  String location)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RobustStringConverter()  String id, @RobustStringConverter()  String name, @RobustDoubleConverter()  double price, @RobustStringConverter()  String currency, @RobustStringConverter()  String imageUrl, @RobustStringConverter()  String location)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_that.location);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String currency,  String imageUrl,  String location)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RobustStringConverter()  String id, @RobustStringConverter()  String name, @RobustDoubleConverter()  double price, @RobustStringConverter()  String currency, @RobustStringConverter()  String imageUrl, @RobustStringConverter()  String location)  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel():
 return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_that.location);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  double price,  String currency,  String imageUrl,  String location)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RobustStringConverter()  String id, @RobustStringConverter()  String name, @RobustDoubleConverter()  double price, @RobustStringConverter()  String currency, @RobustStringConverter()  String imageUrl, @RobustStringConverter()  String location)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_that.location);case _:
@@ -214,15 +214,15 @@ return $default(_that.id,_that.name,_that.price,_that.currency,_that.imageUrl,_t
 @JsonSerializable()
 
 class _ProductModel extends ProductModel {
-  const _ProductModel({required this.id, required this.name, required this.price, required this.currency, required this.imageUrl, required this.location}): super._();
+  const _ProductModel({@RobustStringConverter() required this.id, @RobustStringConverter() required this.name, @RobustDoubleConverter() required this.price, @RobustStringConverter() required this.currency, @RobustStringConverter() required this.imageUrl, @RobustStringConverter() required this.location}): super._();
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
-@override final  String id;
-@override final  String name;
-@override final  double price;
-@override final  String currency;
-@override final  String imageUrl;
-@override final  String location;
+@override@RobustStringConverter() final  String id;
+@override@RobustStringConverter() final  String name;
+@override@RobustDoubleConverter() final  double price;
+@override@RobustStringConverter() final  String currency;
+@override@RobustStringConverter() final  String imageUrl;
+@override@RobustStringConverter() final  String location;
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
@@ -257,7 +257,7 @@ abstract mixin class _$ProductModelCopyWith<$Res> implements $ProductModelCopyWi
   factory _$ProductModelCopyWith(_ProductModel value, $Res Function(_ProductModel) _then) = __$ProductModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, double price, String currency, String imageUrl, String location
+@RobustStringConverter() String id,@RobustStringConverter() String name,@RobustDoubleConverter() double price,@RobustStringConverter() String currency,@RobustStringConverter() String imageUrl,@RobustStringConverter() String location
 });
 
 
