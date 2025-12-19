@@ -198,5 +198,5 @@ Se eligió **Clean Architecture** para garantizar la separación de responsabili
 ---
 
 Desarrollado por Bastian Valencia Jopia. 
-Linkedin: https://www.linkedin.com/in/bastian-valencia/
-Yotube: https://www.youtube.com/@papayasconcrema333 canal propio dedicado a enseñar flutter.
+- Linkedin: https://www.linkedin.com/in/bastian-valencia/
+- Yotube: https://www.youtube.com/@papayasconcrema333 canal propio dedicado a enseñar flutter.
