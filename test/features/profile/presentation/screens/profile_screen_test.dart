@@ -1,4 +1,3 @@
-import 'package:enm/features/profile/data/models/user_model.dart';
 import 'package:enm/features/profile/domain/entities/user.dart';
 import 'package:enm/features/profile/domain/entities/user_role.dart';
 import 'package:enm/features/profile/domain/repositories/profile_repository.dart';

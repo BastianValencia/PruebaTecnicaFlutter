@@ -2,9 +2,9 @@
 
 Aplicación robusta de marketplace en Flutter desarrollada para una prueba técnica.
 
--> arquitectura escalable 
--> patrones de gestión de estado 
--> implementación de UI.
+- **Arquitectura escalable** 
+- **Patrones de gestión de estado** 
+- **Implementación de UI**.
 
 ## 🚀 Funcionalidades
 
@@ -142,6 +142,31 @@ lib/
 
 ---
 
+## 🧠 Decisiones Técnicas y Trade-offs
+
+### **1. Justificación de Arquitectura**
+Se eligió **Clean Architecture** para garantizar la separación de responsabilidades, facilitando el testing y la escalabilidad.
+- **¿Por qué Riverpod?** Se prefirió sobre BLoC por su simplicidad, menor boilerplate y manejo de dependencias seguro y declarativo (sin `context`). Se prefirió sobre GetX para mantener un flujo de datos unidireccional estricto y seguro en tiempo de compilación.
+
+### **2. Trade-offs Asumidos**
+- **Dependencia de Generación de Código (`build_runner`):** Se asume el costo de tiempo extra en generación de código (Freezed/Riverpod) a cambio de obtener **Inmutabilidad** garantizada, `copyWith` automático y **Null Safety** robusta en toda la app.
+- **Complejidad Inicial:** Implementar capas (Domain/Data/Presentation) añade archivos extra para una app pequeña, pero protege el proyecto contra deuda técnica futura.
+
+### **3. Solución a Escenarios de Inconsistencia**
+- **Sanitización de Datos:** Se implementaron `RobustJsonConverters` que interceptan la respuesta del API. Si el backend envía tipos incorrectos (ej. precio como String) o nulos, el app los corrige al vuelo en lugar de fallar.
+- **Manejo de Estados:** Si un producto desaparece (404) o cambia de precio, el sistema de estados (`ProductsNotifier`) captura el error y actualiza el estado del item específico a `missing` o `stale`, permitiendo que la UI muestre mensajes amigables ("Producto no disponible") en lugar de pantallas de error genéricas.
+
+### **4. Límites Conocidos y Riesgos**
+- **Persistencia Volátil:** Al no existir un backend real ni base de datos local completa (SQLite/Hive), todos los cambios se pierden al cerrar la app.
+- **Mock Data:** Toda la data es generada en memoria.
+
+### **5. Mejoras Futuras (Next Steps)**
+- **Persistencia Real:** Implementar backend o base de datos local para guardar cambios permanentemente.
+- **Internacionalización (l10n):** Soporte multi-idioma.
+- **Notificaciones Push:** Para avisos de ofertas o cambios de estado.
+
+---
+
 ## 🛠️ Configuración y Ejecución
 
 1.  **Prerrequisitos:** Flutter SDK instalado.
@@ -172,4 +197,6 @@ lib/
 
 ---
 
-Desarrollado por Bastian Valencia. 
+Desarrollado por Bastian Valencia Jopia. 
+Linkedin: https://www.linkedin.com/in/bastian-valencia/
+Yotube: https://www.youtube.com/@papayasconcrema333 canal propio dedicado a enseñar flutter.
